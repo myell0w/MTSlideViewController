@@ -427,16 +427,16 @@
     rotationEnabled_ = YES;
     tableViewTapGestureRecognizer_.enabled = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
-    
-    if ([self.delegate respondsToSelector:@selector(slideViewControllerDidEndSearching:)]) {
-        [self.delegate slideViewControllerDidEndSearching:self];
-    }
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self cancelSearching];
     [self slideOutSlideNavigationControllerView];
     [tableView_ reloadData];
+    
+    if ([self.delegate respondsToSelector:@selector(slideViewControllerDidEndSearching:)]) {
+        [self.delegate slideViewControllerDidEndSearching:self];
+    }
 }
 
 - (void)cancelSearching {
