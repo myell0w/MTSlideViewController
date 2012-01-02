@@ -136,8 +136,16 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark - SlideViewController
+#pragma mark - MTSlideViewController
 ////////////////////////////////////////////////////////////////////////
+
+- (void)showViewController:(UIViewController *)viewController {
+    if (viewController != nil) {
+        [self configureViewController:viewController];
+        [slideNavigationController_ setViewControllers:[NSArray arrayWithObject:viewController] animated:NO];
+        [self slideInSlideNavigationControllerView];
+    }
+}
 
 - (void)configureViewController:(UIViewController *)viewController {
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MTSlideViewController.bundle/menu_icon"]
@@ -379,9 +387,7 @@
                                atIndexPath:indexPath];
     }
     
-    [self configureViewController:viewController];
-    [slideNavigationController_ setViewControllers:[NSArray arrayWithObject:viewController] animated:NO];
-    [self slideInSlideNavigationControllerView];
+    [self showViewController:viewController];
 }
 
 ////////////////////////////////////////////////////////////////////////

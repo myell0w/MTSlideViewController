@@ -25,11 +25,12 @@
 @property (nonatomic, weak) id <MTSlideViewControllerDataSource> dataSource;
 @property (nonatomic, assign) BOOL slideOnNavigationBarOnly;
 
-
 - (void)slideOutSlideNavigationControllerView;
 - (void)slideInSlideNavigationControllerView;
 - (void)slideSlideNavigationControllerViewOffScreen;
 
 - (void)cancelSearching;
+
+- (void)showViewController:(UIViewController *)viewController;
 
 @end
