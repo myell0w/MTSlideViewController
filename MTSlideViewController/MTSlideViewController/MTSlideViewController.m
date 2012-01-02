@@ -65,9 +65,8 @@
     searchBarBackgroundView_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:searchBarBackgroundView_];
     
-    searchBar_ = [[UISearchBar alloc] initWithFrame:searchBarBackgroundView_.frame];
+    searchBar_ = [[UISearchBar alloc] initWithFrame:CGRectMake(0.f, 0.f, 250.f, 44.f)];
     searchBar_.delegate = self;
-    searchBar_.showsCancelButton = YES;
     searchBar_.tintColor = [UIColor colorWithRed:36.f/255.f green:43.f/255.f blue:57.f/255.f alpha:1.f];
     [self.view addSubview:searchBar_];
     
@@ -110,7 +109,7 @@
     [searchBar_ setBackgroundImage:[searchBarBackground stretchableImageWithLeftCapWidth:0 topCapHeight:0]];
     searchBarBackgroundView_.image = [searchBarBackground stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     searchBar_.placeholder = NSLocalizedString(@"Search", @"Search");
-
+    
     
     if ([self.dataSource respondsToSelector:@selector(initialSelectedIndexPathForSlideViewController:)]) {
         [tableView_ selectRowAtIndexPath:[self.dataSource initialSelectedIndexPathForSlideViewController:self]
@@ -168,18 +167,18 @@
     
     slideNavigationController_.topViewController.view.userInteractionEnabled = NO;
     [UIView animateWithDuration:kMTSlideAnimationDuration
-                          delay:0.0f
+                          delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState 
                      animations:^{
                          slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(260.f, 0.f);
                      } completion:^(BOOL finished) {
-                         searchBar_.frame = CGRectMake(0.f, 0.f, 320.f, searchBar_.frame.size.height);        
+                         searchBar_.frame = CGRectMake(0.f, 0.f, 250.f, searchBar_.frame.size.height);        
                      }];
 }
 
 - (void)slideInSlideNavigationControllerView {
     [UIView animateWithDuration:kMTSlideAnimationDuration 
-                          delay:0.0f
+                          delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          slideNavigationController_.view.transform = CGAffineTransformIdentity;
@@ -191,17 +190,16 @@
 }
 
 - (void)slideSlideNavigationControllerViewOffScreen {
+    CGFloat width = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ? 480.f : 320.f;
+    
     slideNavigationControllerState_ = MTSlideNavigationControllerStateSearching;
     
     [UIView animateWithDuration:kMTSlideAnimationDuration
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseInOut  | UIViewAnimationOptionBeginFromCurrentState 
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState 
                      animations:^{
-                         CGFloat width = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ? 480.f : 320.f;
-                         
                          slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(width, 0.0f);
                          searchBar_.frame = CGRectMake(0.f, 0.f, width, searchBar_.frame.size.height);
-                         
                      } completion:nil];
 }
 
@@ -326,15 +324,15 @@
         return nil;
     }
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 22.0f)];
-    imageView.image = [[UIImage imageNamed:@"MTSlideViewController.bundle/section_background"] stretchableImageWithLeftCapWidth:0.0f topCapHeight:0.0f];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, tableView.bounds.size.width, 22.f)];
+    imageView.image = [[UIImage imageNamed:@"MTSlideViewController.bundle/section_background"] stretchableImageWithLeftCapWidth:0.f topCapHeight:0.f];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(imageView.frame, 10.0f, 0.0f)];
-    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.0f];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(imageView.frame, 10.f, 0.f)];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.f];
     titleLabel.textAlignment = UITextAlignmentLeft;
-    titleLabel.textColor = [UIColor colorWithRed:125.0f/255.0f green:129.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
-    titleLabel.shadowColor = [UIColor colorWithRed:40.0f/255.0f green:45.0f/255.0f blue:57.0f/255.0f alpha:1.0f];
-    titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleLabel.textColor = [UIColor colorWithRed:125.f/255.f green:129.f/255.f blue:146.f/255.f alpha:1.f];
+    titleLabel.shadowColor = [UIColor colorWithRed:40.f/255.f green:45.f/255.f blue:57.f/255.f alpha:1.f];
+    titleLabel.shadowOffset = CGSizeMake(0.f, 1.f);
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.text = titleString;
     [imageView addSubview:titleLabel];
@@ -344,11 +342,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (slideNavigationControllerState_ == MTSlideNavigationControllerStateSearching) {
-        return 0.0f;
+        return 0.f;
     } else if ([self tableView:tableView titleForHeaderInSection:section]) {
-        return 22.0f;
+        return 22.f;
     } else {
-        return 0.0f;
+        return 0.f;
     }
 }
 
@@ -389,6 +387,7 @@
         [tableView_ reloadData];
     }
     
+    [searchBar setShowsCancelButton:YES animated:YES];
     rotationEnabled_ = NO;
 }
 
@@ -401,6 +400,7 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     rotationEnabled_ = YES;
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -408,6 +408,7 @@
     [self slideOutSlideNavigationControllerView];
     [tableView_ reloadData];
     rotationEnabled_ = YES;
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)cancelSearching {
@@ -450,8 +451,8 @@
         return;
     }
     
-    [UIView animateWithDuration:0.05f 
-                          delay:0.0f 
+    [UIView animateWithDuration:0.05 
+                          delay:0.0
                         options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState 
                      animations:^{
                          slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(MAX(startingDragTransformTx_ + (location.x - startingDragPoint_.x), 0.0f), 0.0f);
