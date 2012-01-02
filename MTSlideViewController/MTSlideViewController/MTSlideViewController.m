@@ -389,6 +389,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    if ([self.delegate respondsToSelector:@selector(slideViewControllerDidBeginSearching:)]) {
+        [self.delegate slideViewControllerDidBeginSearching:self];
+    }
+    
     if ([self.dataSource respondsToSelector:@selector(slideViewController:searchTermDidChange:)]) {
         [self slideSlideNavigationControllerViewOffScreen];
         [self.dataSource slideViewController:self searchTermDidChange:searchBar.text];
@@ -417,15 +421,16 @@
     rotationEnabled_ = YES;
     tableViewTapGestureRecognizer_.enabled = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
+    
+    if ([self.delegate respondsToSelector:@selector(slideViewControllerDidEndSearching:)]) {
+        [self.delegate slideViewControllerDidEndSearching:self];
+    }
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self cancelSearching];
     [self slideOutSlideNavigationControllerView];
     [tableView_ reloadData];
-    rotationEnabled_ = YES;
-    tableViewTapGestureRecognizer_.enabled = NO;
-    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)cancelSearching {

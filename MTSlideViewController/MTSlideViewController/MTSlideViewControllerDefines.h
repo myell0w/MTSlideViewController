@@ -65,6 +65,9 @@ typedef enum {
     didSelectViewController:(UIViewController *)viewController
                 atIndexPath:(NSIndexPath *)indexPath;
 
+- (void)slideViewControllerDidBeginSearching:(MTSlideViewController *)slideViewController;
+- (void)slideViewControllerDidEndSearching:(MTSlideViewController *)slideViewController;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////
