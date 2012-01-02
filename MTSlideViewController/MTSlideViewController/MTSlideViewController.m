@@ -13,10 +13,10 @@
     CGFloat startingDragTransformTx_;
 }
 
-@property (nonatomic, strong, readwrite) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UINavigationController *slideNavigationController;
-@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UIImageView *searchBarBackgroundView;
+@property (nonatomic, strong, readwrite) UINavigationController *slideNavigationController;
+@property (nonatomic, strong, readwrite) UITableView *tableView;
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UIImageView *searchBarBackgroundView;
 @property (nonatomic, assign) MTSlideNavigationControllerState slideNavigationControllerState;
 
 - (void)configureViewController:(UIViewController *)viewController;

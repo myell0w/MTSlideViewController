@@ -19,6 +19,7 @@
 
 @interface MTSlideViewController : UIViewController
 
+@property (nonatomic, strong, readonly) UINavigationController *slideNavigationController;
 @property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, weak) id <MTSlideViewControllerDelegate> delegate;
 @property (nonatomic, weak) id <MTSlideViewControllerDataSource> dataSource;
