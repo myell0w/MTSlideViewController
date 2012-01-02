@@ -18,7 +18,6 @@
 @property (nonatomic, strong, readwrite) UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UIImageView *searchBarBackgroundView;
-@property (nonatomic, assign) MTSlideNavigationControllerState slideNavigationControllerState;
 
 - (void)configureViewController:(UIViewController *)viewController;
 - (void)menuBarButtonItemPressed:(id)sender;
