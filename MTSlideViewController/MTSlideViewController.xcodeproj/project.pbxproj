@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9BFF221814B2046B00CF76EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF221714B2046B00CF76EE /* Foundation.framework */; };
+		9BFF222914B204BC00CF76EE /* MTSlideViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFF222414B204BC00CF76EE /* MTSlideViewController.h */; };
+		9BFF222A14B204BC00CF76EE /* MTSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF222514B204BC00CF76EE /* MTSlideViewController.m */; };
+		9BFF222B14B204BC00CF76EE /* MTSlideViewControllerDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFF222614B204BC00CF76EE /* MTSlideViewControllerDefines.h */; };
+		9BFF222C14B204BC00CF76EE /* MTSlideViewTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFF222714B204BC00CF76EE /* MTSlideViewTableViewCell.h */; };
+		9BFF222D14B204BC00CF76EE /* MTSlideViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF222814B204BC00CF76EE /* MTSlideViewTableViewCell.m */; };
+		9BFF223014B2055F00CF76EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF222F14B2055F00CF76EE /* UIKit.framework */; };
+		9BFF223214B2056400CF76EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF223114B2056400CF76EE /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9BFF221414B2046B00CF76EE /* libMTSlideViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTSlideViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BFF221714B2046B00CF76EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9BFF221B14B2046B00CF76EE /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		9BFF222414B204BC00CF76EE /* MTSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSlideViewController.h; sourceTree = "<group>"; };
+		9BFF222514B204BC00CF76EE /* MTSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSlideViewController.m; sourceTree = "<group>"; };
+		9BFF222614B204BC00CF76EE /* MTSlideViewControllerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSlideViewControllerDefines.h; sourceTree = "<group>"; };
+		9BFF222714B204BC00CF76EE /* MTSlideViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSlideViewTableViewCell.h; sourceTree = "<group>"; };
+		9BFF222814B204BC00CF76EE /* MTSlideViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSlideViewTableViewCell.m; sourceTree = "<group>"; };
+		9BFF222F14B2055F00CF76EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9BFF223114B2056400CF76EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9BFF223314B2058100CF76EE /* MTSlideViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTSlideViewController.bundle; path = Resources/MTSlideViewController.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BFF221114B2046B00CF76EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFF223214B2056400CF76EE /* CoreGraphics.framework in Frameworks */,
+				9BFF223014B2055F00CF76EE /* UIKit.framework in Frameworks */,
+				9BFF221814B2046B00CF76EE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9BFF220914B2046B00CF76EE = {
+			isa = PBXGroup;
+			children = (
+				9BFF221914B2046B00CF76EE /* MTSlideViewController */,
+				9BFF222E14B2054500CF76EE /* Resources */,
+				9BFF221614B2046B00CF76EE /* Frameworks */,
+				9BFF221514B2046B00CF76EE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9BFF221514B2046B00CF76EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF221414B2046B00CF76EE /* libMTSlideViewController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9BFF221614B2046B00CF76EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF223114B2056400CF76EE /* CoreGraphics.framework */,
+				9BFF222F14B2055F00CF76EE /* UIKit.framework */,
+				9BFF221714B2046B00CF76EE /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BFF221914B2046B00CF76EE /* MTSlideViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF222414B204BC00CF76EE /* MTSlideViewController.h */,
+				9BFF222514B204BC00CF76EE /* MTSlideViewController.m */,
+				9BFF222614B204BC00CF76EE /* MTSlideViewControllerDefines.h */,
+				9BFF222714B204BC00CF76EE /* MTSlideViewTableViewCell.h */,
+				9BFF222814B204BC00CF76EE /* MTSlideViewTableViewCell.m */,
+				9BFF221A14B2046B00CF76EE /* Supporting Files */,
+			);
+			path = MTSlideViewController;
+			sourceTree = "<group>";
+		};
+		9BFF221A14B2046B00CF76EE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF221B14B2046B00CF76EE /* Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9BFF222E14B2054500CF76EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF223314B2058100CF76EE /* MTSlideViewController.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9BFF221214B2046B00CF76EE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFF222914B204BC00CF76EE /* MTSlideViewController.h in Headers */,
+				9BFF222B14B204BC00CF76EE /* MTSlideViewControllerDefines.h in Headers */,
+				9BFF222C14B204BC00CF76EE /* MTSlideViewTableViewCell.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9BFF221314B2046B00CF76EE /* MTSlideViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BFF222114B2046B00CF76EE /* Build configuration list for PBXNativeTarget "MTSlideViewController" */;
+			buildPhases = (
+				9BFF221014B2046B00CF76EE /* Sources */,
+				9BFF221114B2046B00CF76EE /* Frameworks */,
+				9BFF221214B2046B00CF76EE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTSlideViewController;
+			productName = MTSlideViewController;
+			productReference = 9BFF221414B2046B00CF76EE /* libMTSlideViewController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9BFF220B14B2046B00CF76EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
+			};
+			buildConfigurationList = 9BFF220E14B2046B00CF76EE /* Build configuration list for PBXProject "MTSlideViewController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9BFF220914B2046B00CF76EE;
+			productRefGroup = 9BFF221514B2046B00CF76EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9BFF221314B2046B00CF76EE /* MTSlideViewController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9BFF221014B2046B00CF76EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFF222A14B204BC00CF76EE /* MTSlideViewController.m in Sources */,
+				9BFF222D14B204BC00CF76EE /* MTSlideViewTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9BFF221F14B2046B00CF76EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9BFF222014B2046B00CF76EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9BFF222214B2046B00CF76EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MTSlideViewController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MTSlideViewController/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9BFF222314B2046B00CF76EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MTSlideViewController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MTSlideViewController/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9BFF220E14B2046B00CF76EE /* Build configuration list for PBXProject "MTSlideViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BFF221F14B2046B00CF76EE /* Debug */,
+				9BFF222014B2046B00CF76EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BFF222114B2046B00CF76EE /* Build configuration list for PBXNativeTarget "MTSlideViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BFF222214B2046B00CF76EE /* Debug */,
+				9BFF222314B2046B00CF76EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9BFF220B14B2046B00CF76EE /* Project object */;
+}

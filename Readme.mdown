@@ -1,0 +1,10 @@
+Read Me
+=====================
+
+MTSlideViewController tries to mimic Facebook's and Path's sliding navigation concept for the iPhone. It is iOS 5 only and built usinc ARC.
+MTSlideViewController is initally based on Andrew Roy Carter's [SlideViewController](https://github.com/andrewroycarter/SlideViewController "SlideViewController") and got modiefied to support rotation, ARC and lots of small improvements.
+
+Screenshots
+-------------------
+
+![Screenshot: Launch image](https://img.skitch.com/20120102-m6nt5nt5dy2sarqsd7x923dpjr.jpg)
