@@ -11,6 +11,7 @@
     BOOL rotationEnabled_;
     CGPoint startingDragPoint_;
     CGFloat startingDragTransformTx_;
+    UITapGestureRecognizer *tableViewTapGestureRecognizer_;
 }
 
 @property (nonatomic, strong, readwrite) UINavigationController *slideNavigationController;
@@ -105,11 +106,14 @@
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationBarPan:)];
     [slideNavigationController_.navigationBar addGestureRecognizer:panRecognizer];
     
+    tableViewTapGestureRecognizer_ = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableViewTap:)];
+    tableViewTapGestureRecognizer_.enabled = NO;
+    [self.tableView addGestureRecognizer:tableViewTapGestureRecognizer_];
+    
     UIImage *searchBarBackground = [UIImage imageNamed:@"MTSlideViewController.bundle/search_bar_background"];
     [searchBar_ setBackgroundImage:[searchBarBackground stretchableImageWithLeftCapWidth:0 topCapHeight:0]];
     searchBarBackgroundView_.image = [searchBarBackground stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     searchBar_.placeholder = NSLocalizedString(@"Search", @"Search");
-    
     
     if ([self.dataSource respondsToSelector:@selector(initialSelectedIndexPathForSlideViewController:)]) {
         [tableView_ selectRowAtIndexPath:[self.dataSource initialSelectedIndexPathForSlideViewController:self]
@@ -217,6 +221,10 @@
                gestureRecognizer.state == UIGestureRecognizerStateFailed) {
         [self handleTouchesEndedAtLocation:[gestureRecognizer locationInView:self.view]];
     }
+}
+
+- (void)handleTableViewTap:(UITapGestureRecognizer *)gestureRecognizer {
+    [searchBar_ resignFirstResponder];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -389,6 +397,7 @@
     
     [searchBar setShowsCancelButton:YES animated:YES];
     rotationEnabled_ = NO;
+    tableViewTapGestureRecognizer_.enabled = YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -396,10 +405,17 @@
         [self.dataSource slideViewController:self searchTermDidChange:searchBar.text];
         [tableView_ reloadData];
     }
+    
+    if (searchText.length == 0) {
+        tableViewTapGestureRecognizer_.enabled = YES;
+    } else {
+        tableViewTapGestureRecognizer_.enabled = NO;
+    }
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     rotationEnabled_ = YES;
+    tableViewTapGestureRecognizer_.enabled = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
@@ -408,6 +424,7 @@
     [self slideOutSlideNavigationControllerView];
     [tableView_ reloadData];
     rotationEnabled_ = YES;
+    tableViewTapGestureRecognizer_.enabled = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
