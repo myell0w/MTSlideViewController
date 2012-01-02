@@ -22,12 +22,12 @@
 #pragma mark - Defines
 ////////////////////////////////////////////////////////////////////////
 
-#define kMTSlideViewControllerSectionTitleKey           @"MTSlideViewControllerSectionTitleKey"
-#define kMTSlideViewControllerSectionTitleNoTitle       @"MTSlideViewControllerSectionTitleNoTitle"
-#define kMTSlideViewControllerSectionViewControllersKey @"MTSlideViewControllerSectionViewControllersKey"
-#define kMTSlideViewControllerViewControllerTitleKey    @"MTSlideViewControllerViewControllerTitleKey"
-#define kMTSlideViewControllerViewControllerIconKey     @"MTSlideViewControllerViewControllerIconKey"
-#define kMTSlideViewControllerViewControllerKey         @"MTSlideViewControllerViewControllerKey"
+#define kMTSlideViewControllerSectionTitleKey           @"kMTSlideViewControllerSectionTitleKey"
+#define kMTSlideViewControllerSectionTitleNoTitle       @"kMTSlideViewControllerSectionTitleNoTitle"
+#define kMTSlideViewControllerSectionViewControllersKey @"kMTSlideViewControllerSectionViewControllersKey"
+#define kMTSlideViewControllerViewControllerTitleKey    @"kMTSlideViewControllerViewControllerTitleKey"
+#define kMTSlideViewControllerViewControllerIconKey     @"kMTSlideViewControllerViewControllerIconKey"
+#define kMTSlideViewControllerViewControllerKey         @"kMTSlideViewControllerViewControllerKey"
 
 typedef enum {
     MTSlideNavigationControllerStateNormal = 0,

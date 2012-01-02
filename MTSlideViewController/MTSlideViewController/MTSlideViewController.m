@@ -2,9 +2,10 @@
 #import "MTSlideViewTableViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kMTLeftAnchorX                  100.0f
-#define kMTRightAnchorX                 190.0f
-#define kMTSlideAnimationDuration       0.2
+#define kMTLeftSlideDecisionPointX                  100.0f
+#define kMTRightSlideDecisionPointX                 190.0f
+#define kMTSlideAnimationDuration                   0.2
+#define kMTRightAnchorX                             260.f
 
 
 @interface MTSlideViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UISearchBarDelegate, UITextFieldDelegate> {
@@ -65,7 +66,7 @@
     searchBarBackgroundView_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:searchBarBackgroundView_];
     
-    searchBar_ = [[UISearchBar alloc] initWithFrame:CGRectMake(0.f, 0.f, 250.f, 44.f)];
+    searchBar_ = [[UISearchBar alloc] initWithFrame:CGRectMake(0.f, 0.f, kMTRightAnchorX, 44.f)];
     searchBar_.delegate = self;
     searchBar_.tintColor = [UIColor colorWithRed:36.f/255.f green:43.f/255.f blue:57.f/255.f alpha:1.f];
     [self.view addSubview:searchBar_];
@@ -181,9 +182,9 @@
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState 
                      animations:^{
-                         slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(260.f, 0.f);
+                         slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(kMTRightAnchorX, 0.f);
                      } completion:^(BOOL finished) {
-                         searchBar_.frame = CGRectMake(0.f, 0.f, 250.f, searchBar_.frame.size.height);        
+                         searchBar_.frame = CGRectMake(0.f, 0.f, kMTRightAnchorX, searchBar_.frame.size.height);        
                      }];
 }
 
@@ -490,13 +491,13 @@
     if (slideNavigationControllerState_ == MTSlideNavigationControllerStateDragging) {
         // Check in which direction we were dragging
         if (location.x < startingDragPoint_.x) {
-            if (slideNavigationController_.view.transform.tx <= kMTRightAnchorX) {
+            if (slideNavigationController_.view.transform.tx <= kMTRightSlideDecisionPointX) {
                 [self slideInSlideNavigationControllerView];
             } else {
                 [self slideOutSlideNavigationControllerView]; 
             }
         } else {
-            if (slideNavigationController_.view.transform.tx >= kMTLeftAnchorX) {
+            if (slideNavigationController_.view.transform.tx >= kMTLeftSlideDecisionPointX) {
                 [self slideOutSlideNavigationControllerView];
             } else {
                 [self slideInSlideNavigationControllerView];
