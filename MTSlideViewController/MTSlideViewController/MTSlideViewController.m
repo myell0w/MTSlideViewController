@@ -27,7 +27,7 @@
 
 - (void)configureViewController:(UIViewController *)viewController;
 - (void)menuBarButtonItemPressed:(id)sender;
-- (void)handleNavigationBarPan:(UIPanGestureRecognizer *)gestureRecognizer;
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer;
 
 - (void)handleTouchesBeganAtLocation:(CGPoint)location;
 - (void)handleTouchesMovedToLocation:(CGPoint)location;
@@ -108,8 +108,9 @@
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:slideNavigationController_.view.bounds cornerRadius:4.0];
     slideNavigationController_.view.layer.shadowPath = path.CGPath;
     
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationBarPan:)];
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [slideNavigationController_.navigationBar addGestureRecognizer:panRecognizer];
+    [slideNavigationController_.view addGestureRecognizer:panRecognizer];
     
     tableViewTapGestureRecognizer_ = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableViewTap:)];
     tableViewTapGestureRecognizer_.enabled = NO;
@@ -224,7 +225,7 @@
 #pragma mark - UIGestureRecognizer
 ////////////////////////////////////////////////////////////////////////
 
-- (void)handleNavigationBarPan:(UIPanGestureRecognizer *)gestureRecognizer {
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         [self handleTouchesBeganAtLocation:[gestureRecognizer locationInView:self.view]];
     } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
@@ -249,25 +250,6 @@
 
 - (void)handleTableViewTap:(UITapGestureRecognizer *)gestureRecognizer {
     [searchBar_ resignFirstResponder];
-}
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - UITouch Handling
-////////////////////////////////////////////////////////////////////////
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    [self handleTouchesBeganAtLocation:[touch locationInView:self.view]];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    [self handleTouchesMovedToLocation:[touch locationInView:self.view]];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    [self handleTouchesEndedAtLocation:[touch locationInView:self.view]];
 }
 
 ////////////////////////////////////////////////////////////////////////
