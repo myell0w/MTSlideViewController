@@ -18,6 +18,7 @@
     CGPoint startingDragPoint_;
     CGFloat startingDragTransformTx_;
     UITapGestureRecognizer *tableViewTapGestureRecognizer_;
+    UITapGestureRecognizer *slideInTapGestureRecognizer_;
 }
 
 @property (nonatomic, strong, readwrite) UINavigationController *slideNavigationController;
@@ -119,8 +120,9 @@
     [slideNavigationController_.navigationBar addGestureRecognizer:panRecognizer];
     [slideNavigationController_.view addGestureRecognizer:panRecognizer];
     
-    UITapGestureRecognizer *slideInTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlideInTap:)];
-    [slideNavigationController_.view addGestureRecognizer:slideInTapGestureRecognizer];
+    slideInTapGestureRecognizer_ = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlideInTap:)];
+    slideInTapGestureRecognizer_.enabled = NO;
+    [slideNavigationController_.view addGestureRecognizer:slideInTapGestureRecognizer_];
     
     tableViewTapGestureRecognizer_ = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableViewTap:)];
     tableViewTapGestureRecognizer_.enabled = NO;
@@ -200,7 +202,8 @@
                      animations:^{
                          slideNavigationController_.view.transform = CGAffineTransformMakeTranslation(kMTRightAnchorX, 0.f);
                      } completion:^(BOOL finished) {
-                         searchBar_.frame = CGRectMake(0.f, 0.f, kMTRightAnchorX, searchBar_.frame.size.height);        
+                         searchBar_.frame = CGRectMake(0.f, 0.f, kMTRightAnchorX, searchBar_.frame.size.height);
+                         slideInTapGestureRecognizer_.enabled = YES;
                      }];
 }
 
@@ -212,6 +215,7 @@
                          slideNavigationController_.view.transform = CGAffineTransformIdentity;
                      } completion:^(BOOL finished) {
                          slideNavigationController_.topViewController.view.userInteractionEnabled = YES;
+                         slideInTapGestureRecognizer_.enabled = NO;
                          [self cancelSearching];
                          slideState_ = MTSlideViewControllerStateNormal;
                      }];
@@ -221,6 +225,7 @@
     CGFloat width = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ? 480.f : 320.f;
     
     slideState_ = MTSlideViewControllerStateSearching;
+    slideInTapGestureRecognizer_.enabled = NO;
     
     [UIView animateWithDuration:kMTSlideAnimationDuration
                           delay:0.0
