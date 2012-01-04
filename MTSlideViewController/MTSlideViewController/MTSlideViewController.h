@@ -20,7 +20,7 @@
 @interface MTSlideViewController : UIViewController
 
 @property (nonatomic, strong, readonly) UINavigationController *slideNavigationController;
-@property (nonatomic, assign) MTSlideNavigationControllerState slideNavigationControllerState;
+@property (nonatomic, assign) MTSlideViewControllerState slideState;
 @property (nonatomic, assign) BOOL slideOnNavigationBarOnly;
 
 @property (nonatomic, weak) id <MTSlideViewControllerDelegate> delegate;

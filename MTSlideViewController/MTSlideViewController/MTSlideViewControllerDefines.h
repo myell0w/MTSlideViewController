@@ -30,12 +30,12 @@
 #define kMTSlideViewControllerViewControllerKey         @"kMTSlideViewControllerViewControllerKey"
 
 typedef enum {
-    MTSlideNavigationControllerStateNormal = 0,
-    MTSlideNavigationControllerStateDragging,
-    MTSlideNavigationControllerStatePeeking,
-    MTSlideNavigationControllerStateDrilledDown,
-    MTSlideNavigationControllerStateSearching
-} MTSlideNavigationControllerState;
+    MTSlideViewControllerStateNormal = 0,
+    MTSlideViewControllerStateDragging,
+    MTSlideViewControllerStatePeeking,
+    MTSlideViewControllerStateDrilledDown,
+    MTSlideViewControllerStateSearching
+} MTSlideViewControllerState;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTSlideViewControllerDataSource
