@@ -2,8 +2,8 @@
 #import "MTSlideViewTableViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kMTLeftSlideDecisionPointX                  100.0f
-#define kMTRightSlideDecisionPointX                 190.0f
+#define kMTLeftSlideDecisionPointX                  80.0f
+#define kMTRightSlideDecisionPointX                 250.0f
 #define kMTSlideAnimationDuration                   0.2
 #define kMTRightAnchorX                             260.f
 
