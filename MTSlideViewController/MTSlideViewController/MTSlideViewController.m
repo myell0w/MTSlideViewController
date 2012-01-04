@@ -455,8 +455,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)handleTouchesBeganAtLocation:(CGPoint)location {
-    if (slideNavigationControllerState_ == MTSlideNavigationControllerStateDrilledDown
-        || slideNavigationControllerState_ == MTSlideNavigationControllerStateSearching) {
+    if (slideNavigationControllerState_ == MTSlideNavigationControllerStateSearching) {
         return;
     }
     
