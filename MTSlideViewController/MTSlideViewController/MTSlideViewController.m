@@ -2,10 +2,13 @@
 #import "MTSlideViewTableViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kMTLeftSlideDecisionPointX                  80.0f
-#define kMTRightSlideDecisionPointX                 250.0f
+/** Point at which panel slides out if moved from left */
+#define kMTLeftSlideDecisionPointX                  80.f
+/** Point at which panel slides in if moved from right */
+#define kMTRightSlideDecisionPointX                 265.f
+/** Position where panel starts when slided out */
+#define kMTRightAnchorX                             270.f
 #define kMTSlideAnimationDuration                   0.2
-#define kMTRightAnchorX                             260.f
 
 
 @interface MTSlideViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UISearchBarDelegate, UITextFieldDelegate> {
