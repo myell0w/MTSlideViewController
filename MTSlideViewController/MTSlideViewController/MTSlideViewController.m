@@ -27,7 +27,10 @@
 
 - (void)configureViewController:(UIViewController *)viewController;
 - (void)menuBarButtonItemPressed:(id)sender;
+
 - (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer;
+- (void)handleSlideInTap:(UITapGestureRecognizer *)gestureRecognizer;
+- (void)handleTableViewTap:(UITapGestureRecognizer *)gestureRecognizer;
 
 - (void)handleTouchesBeganAtLocation:(CGPoint)location;
 - (void)handleTouchesMovedToLocation:(CGPoint)location;
@@ -115,6 +118,9 @@
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [slideNavigationController_.navigationBar addGestureRecognizer:panRecognizer];
     [slideNavigationController_.view addGestureRecognizer:panRecognizer];
+    
+    UITapGestureRecognizer *slideInTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlideInTap:)];
+    [slideNavigationController_.view addGestureRecognizer:slideInTapGestureRecognizer];
     
     tableViewTapGestureRecognizer_ = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableViewTap:)];
     tableViewTapGestureRecognizer_.enabled = NO;
@@ -249,6 +255,12 @@
         }  else {
             [self handleTouchesEndedAtLocation:[gestureRecognizer locationInView:self.view]];
         }
+    }
+}
+
+- (void)handleSlideInTap:(UITapGestureRecognizer *)gestureRecognizer {
+    if (slideState_ == MTSlideViewControllerStatePeeking) {
+        [self slideInSlideNavigationControllerView];
     }
 }
 
