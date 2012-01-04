@@ -3,11 +3,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 /** Point at which panel slides out if moved from left */
-#define kMTLeftSlideDecisionPointX                  80.f
+#define kMTLeftSlideDecisionPointX                  100.f
 /** Point at which panel slides in if moved from right */
 #define kMTRightSlideDecisionPointX                 265.f
 /** Position where panel starts when slided out */
 #define kMTRightAnchorX                             270.f
+/** Minimum velocity to recognize a pan as a quick flip */
+#define kMTMinimumVelocityToTriggerSlide            1000.f
 #define kMTSlideAnimationDuration                   0.2
 
 
@@ -230,7 +232,18 @@
     } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded ||
                gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
                gestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self handleTouchesEndedAtLocation:[gestureRecognizer locationInView:self.view]];
+        CGFloat velocity = [gestureRecognizer velocityInView:self.view].x;
+        
+        // Quick Flick?
+        if (fabs(velocity) > kMTMinimumVelocityToTriggerSlide) {
+            if (velocity > 0.f) {
+                [self slideOutSlideNavigationControllerView];
+            } else {
+                [self slideInSlideNavigationControllerView];
+            }
+        }  else {
+            [self handleTouchesEndedAtLocation:[gestureRecognizer locationInView:self.view]];
+        }
     }
 }
 
@@ -430,6 +443,10 @@
     rotationEnabled_ = YES;
     tableViewTapGestureRecognizer_.enabled = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
