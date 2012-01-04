@@ -41,20 +41,24 @@
 @synthesize searchBar = searchBar_;
 @synthesize searchBarBackgroundView = searchBarBackgroundView_;
 @synthesize tableView = tableView_;
-@synthesize slideState = slideNavigationControllerState_;
+@synthesize slideState = slideState_;
 @synthesize delegate = delegate_;
 @synthesize dataSource = dataSource_;
-@synthesize slideOnNavigationBarOnly = slideOnNavigationBarOnly_;
+@synthesize slideMode = slideMode_;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Lifecycle
 ////////////////////////////////////////////////////////////////////////
 
++ (MTSlideViewController *)slideViewController {
+    return [[[self class] alloc] initWithNibName:nil bundle:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nil])) {
         rotationEnabled_ = YES;
-        slideOnNavigationBarOnly_ = NO;
-        slideNavigationControllerState_ = MTSlideViewControllerStateNormal;
+        slideMode_ = MTSlideViewControllerModeAllViewController | MTSlideViewControllerModeWholeView;
+        slideState_ = MTSlideViewControllerStateNormal;
     }
     
     return self;
@@ -163,7 +167,7 @@
 }
 
 - (void)menuBarButtonItemPressed:(id)sender {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStatePeeking) {
+    if (slideState_ == MTSlideViewControllerStatePeeking) {
         [self slideInSlideNavigationControllerView];
         return;
     }
@@ -181,9 +185,9 @@
 }
 
 - (void)slideOutSlideNavigationControllerView {
-    slideNavigationControllerState_ = MTSlideViewControllerStatePeeking;
-    
+    slideState_ = MTSlideViewControllerStatePeeking;
     slideNavigationController_.topViewController.view.userInteractionEnabled = NO;
+    
     [UIView animateWithDuration:kMTSlideAnimationDuration
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState 
@@ -203,14 +207,14 @@
                      } completion:^(BOOL finished) {
                          slideNavigationController_.topViewController.view.userInteractionEnabled = YES;
                          [self cancelSearching];
-                         slideNavigationControllerState_ = MTSlideViewControllerStateNormal;
+                         slideState_ = MTSlideViewControllerStateNormal;
                      }];
 }
 
 - (void)slideSlideNavigationControllerViewOffScreen {
     CGFloat width = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ? 480.f : 320.f;
     
-    slideNavigationControllerState_ = MTSlideViewControllerStateSearching;
+    slideState_ = MTSlideViewControllerStateSearching;
     
     [UIView animateWithDuration:kMTSlideAnimationDuration
                           delay:0.0
@@ -260,9 +264,9 @@
     [self cancelSearching];
     
     if ([navigationController viewControllers].count > 1) {
-        slideNavigationControllerState_ = MTSlideViewControllerStateDrilledDown;
+        slideState_ = MTSlideViewControllerStateDrilledDown;
     } else {
-        slideNavigationControllerState_ = MTSlideViewControllerStateNormal;
+        slideState_ = MTSlideViewControllerStateNormal;
     }
 }
 
@@ -271,7 +275,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return [self.dataSource searchDatasourceForSlideViewController:self].count;
     } else {
         return [[[[self.dataSource datasourceForSlideViewController:self] objectAtIndex:section] objectForKey:kMTSlideViewControllerSectionViewControllersKey] count];        
@@ -279,7 +283,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return 1;
     } else {
         return [self.dataSource datasourceForSlideViewController:self].count;
@@ -290,7 +294,7 @@
     MTSlideViewTableViewCell *cell = [MTSlideViewTableViewCell cellForTableView:tableView style:UITableViewCellStyleDefault ];
     NSDictionary *viewControllerDictionary = nil;
     
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         viewControllerDictionary = [[self.dataSource searchDatasourceForSlideViewController:self] objectAtIndex:indexPath.row];
     } else {
         viewControllerDictionary = [[[[self.dataSource datasourceForSlideViewController:self] objectAtIndex:indexPath.section] objectForKey:kMTSlideViewControllerSectionViewControllersKey] objectAtIndex:indexPath.row];
@@ -308,7 +312,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return nil;
     }
     
@@ -328,7 +332,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return nil;
     }
     
@@ -355,7 +359,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return 0.f;
     } else if ([self tableView:tableView titleForHeaderInSection:section]) {
         return 22.f;
@@ -371,7 +375,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *viewControllerDictionary = nil;
     
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         viewControllerDictionary = [[self.dataSource searchDatasourceForSlideViewController:self] objectAtIndex:indexPath.row];
     } else {
         viewControllerDictionary = [[[[self.dataSource datasourceForSlideViewController:self] objectAtIndex:indexPath.section] objectForKey:kMTSlideViewControllerSectionViewControllersKey] objectAtIndex:indexPath.row];
@@ -442,9 +446,9 @@
 }
 
 - (void)cancelSearching {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         [searchBar_ resignFirstResponder];
-        slideNavigationControllerState_ = MTSlideViewControllerStateNormal;
+        slideState_ = MTSlideViewControllerStateNormal;
         searchBar_.text = @"";
         [tableView_ reloadData];
     }
@@ -455,28 +459,33 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)handleTouchesBeganAtLocation:(CGPoint)location {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateSearching) {
+    if (!(slideMode_ & MTSlideViewControllerModeAllViewController) &&
+        slideState_ == MTSlideViewControllerStateDrilledDown) {
+        return;
+    }
+    
+    if (slideState_ == MTSlideViewControllerStateSearching) {
         return;
     }
     
     startingDragPoint_ = location;
     
     if ((CGRectContainsPoint(slideNavigationController_.view.frame, startingDragPoint_)) && 
-        slideNavigationControllerState_ == MTSlideViewControllerStatePeeking) {
-        slideNavigationControllerState_ = MTSlideViewControllerStateDragging;
+        slideState_ == MTSlideViewControllerStatePeeking) {
+        slideState_ = MTSlideViewControllerStateDragging;
         startingDragTransformTx_ = slideNavigationController_.view.transform.tx;
     }
     
     // we only trigger a swipe if either navigationBarOnly is deactivated
     // or we swiped in the navigationBar
-    if (!self.slideOnNavigationBarOnly || startingDragPoint_.y <= self.slideNavigationController.navigationBar.frame.size.height) {
-        slideNavigationControllerState_ = MTSlideViewControllerStateDragging;
+    if (slideMode_ & MTSlideViewControllerModeWholeView || startingDragPoint_.y <= self.slideNavigationController.navigationBar.frame.size.height) {
+        slideState_ = MTSlideViewControllerStateDragging;
         startingDragTransformTx_ = slideNavigationController_.view.transform.tx;
     }
 }
 
 - (void)handleTouchesMovedToLocation:(CGPoint)location {
-    if (slideNavigationControllerState_ != MTSlideViewControllerStateDragging) {
+    if (slideState_ != MTSlideViewControllerStateDragging) {
         return;
     }
     
@@ -489,7 +498,7 @@
 }
 
 - (void)handleTouchesEndedAtLocation:(CGPoint)location {
-    if (slideNavigationControllerState_ == MTSlideViewControllerStateDragging) {
+    if (slideState_ == MTSlideViewControllerStateDragging) {
         // Check in which direction we were dragging
         if (location.x < startingDragPoint_.x) {
             if (slideNavigationController_.view.transform.tx <= kMTRightSlideDecisionPointX) {

@@ -37,6 +37,14 @@ typedef enum {
     MTSlideViewControllerStateSearching
 } MTSlideViewControllerState;
 
+typedef enum {
+    MTSlideViewControllerModeNavigationBarOnly      = 1 << 0,     // Sliding only possible in navigationBar
+    MTSlideViewControllerModeWholeView              = 1 << 1,     // Sliding possible on whole view
+    
+    MTSlideViewControllerModeTopViewControllerOnly  = 1 << 2,     // Sliding only possible on top View Controller
+    MTSlideViewControllerModeAllViewController      = 1 << 3,     // Sliding also possible when drilled down
+} MTSlideViewControllerMode;
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - MTSlideViewControllerDataSource
 ////////////////////////////////////////////////////////////////////////

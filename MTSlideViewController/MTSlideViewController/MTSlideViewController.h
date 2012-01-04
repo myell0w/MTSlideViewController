@@ -21,12 +21,14 @@
 
 @property (nonatomic, strong, readonly) UINavigationController *slideNavigationController;
 @property (nonatomic, assign) MTSlideViewControllerState slideState;
-@property (nonatomic, assign) BOOL slideOnNavigationBarOnly;
+@property (nonatomic, assign) MTSlideViewControllerMode slideMode;
 
 @property (nonatomic, weak) id <MTSlideViewControllerDelegate> delegate;
 @property (nonatomic, weak) id <MTSlideViewControllerDataSource> dataSource;
 
 @property (nonatomic, strong, readonly) UITableView *tableView;
+
++ (MTSlideViewController *)slideViewController;
 
 - (void)slideOutSlideNavigationControllerView;
 - (void)slideInSlideNavigationControllerView;
